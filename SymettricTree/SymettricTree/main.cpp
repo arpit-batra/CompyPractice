@@ -1,8 +1,8 @@
 //
 //  main.cpp
-//  MaximumDepthOfBinaryTree
+//  SymettricTree
 //
-//  Created by Arpit Batra on 17/05/23.
+//  Created by Arpit Batra on 05/08/23.
 //
 
 #include <iostream>
@@ -39,22 +39,33 @@ int maxDepth(TreeNode* root) {
     return max(maxDepth(root->left),maxDepth(root->right))+1;
 }
 
-bool isSameTree(TreeNode* p, TreeNode* q) {
-    if(p==nullptr && q==nullptr)return true;
-    if(p==nullptr || q==nullptr)return false;
-    if(p->val!=q->val)return false;
-    return isSameTree(p->left, q->left) && isSameTree(p->right,q->right);
+TreeNode* invertTree(TreeNode* root) {
+    if(root==nullptr)return nullptr;
+    TreeNode* temp = root->left;
+    root->left = root->right;
+    root->right = temp;
+    root->left = invertTree(root->left);
+    root->right = invertTree(root->right);
+    return root;
+}
+
+bool isMirror(TreeNode *leftOne, TreeNode *rightOne){
+    if(leftOne==nullptr && rightOne==nullptr)return true;
+    if(leftOne==nullptr || rightOne==nullptr)return false;
+    if(leftOne->val!=rightOne->val)return false;
+    return isMirror(leftOne->left,rightOne->right) && isMirror(leftOne->right, rightOne->left);
+}
+
+bool isSymmetric(TreeNode* root) {
+    if(root==nullptr)return true;
+    if(root->left==nullptr && root->right==nullptr)return true;
+    TreeNode* leftOne = root->left;
+    TreeNode* rightOne = root->right;
+    return isMirror(leftOne,rightOne);
 }
 
 int main(int argc, const char * argv[]) {
-    int n;
-    while(true){
-        cout << "Enter length of array\n";
-        cin >> n;
-        vector<int>input(n);
-        for(int i=0;i<n;i++){
-            cin >>input[i];
-        }
-    }
+    // insert code here...
+    std::cout << "Hello, World!\n";
     return 0;
-    }
+}

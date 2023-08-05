@@ -1,8 +1,8 @@
 //
 //  main.cpp
-//  MaximumDepthOfBinaryTree
+//  SameTree
 //
-//  Created by Arpit Batra on 17/05/23.
+//  Created by Arpit Batra on 05/08/23.
 //
 
 #include <iostream>
@@ -34,16 +34,8 @@ TreeNode* duplicateTree(TreeNode * original){
     return newTree;
 }
 
-int maxDepth(TreeNode* root) {
-    if(root==nullptr)return 0;
-    return max(maxDepth(root->left),maxDepth(root->right))+1;
-}
-
 bool isSameTree(TreeNode* p, TreeNode* q) {
-    if(p==nullptr && q==nullptr)return true;
-    if(p==nullptr || q==nullptr)return false;
-    if(p->val!=q->val)return false;
-    return isSameTree(p->left, q->left) && isSameTree(p->right,q->right);
+    
 }
 
 int main(int argc, const char * argv[]) {
@@ -57,4 +49,4 @@ int main(int argc, const char * argv[]) {
         }
     }
     return 0;
-    }
+}
